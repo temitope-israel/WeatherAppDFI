@@ -57,7 +57,7 @@ function populateUi() {
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const api = `http://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${apiKey}`
+    const api = `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${apiKey}`
     async function getData() {
         const res = await fetch(api);
         let data = await res.json();
@@ -76,7 +76,7 @@ if('geolocation' in navigator){
 }
 
 const getWeather = (latitude, longitude) => {
-    let api = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+    let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
     async function getLocalWeather(){
         let res = await fetch(api)
         let data = await res.json();
