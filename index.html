@@ -1,99 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <title>Weather App</title>
 </head>
+
 <body>
 
- <div class="row mx-auto">
-   <!-- left side on large screen -->
-   <div class="col-md-7 left">
-    <div class="row weather mx-auto mt-5">
-      <div class="col-3 mx-auto">
-        <h1><span id="temperature">23</span>°c</h1>
-      </div>
-      <div class="col mx-auto" >
-        <div class="col mx-auto" id="location">
-           <h3 class="location">Lagos</h3>
+  <div class="row mx-auto">
+    <!-- left side on large screen -->
+    <div class="col-md-7 left">
+      <div class="row weather mx-auto mt-5">
+        <div class="col-3 mx-auto">
+          <h1><span id="temperature">23</span>°c</h1>
+        </div>
+        <div class="col mx-auto">
+          <div class="col mx-auto" id="location">
+            <h3 class="location">Lagos</h3>
           </div>
-        <div class="col mx-auto" id="time"> <p><sub>7:00 Monday May 31, 2021</sub> </p></div>
-      </div>
-      <div class="col-4 img mx-auto">
-        <div class="col" id="weather-img">
-          <img src="/images/icon.png">
+          <div class="col mx-auto" id="time">
+            <p><sub>
+                <script>
+                  document.write(new Date().toDateString())
+                </script>
+              </sub></p>
+          </div>
         </div>
-        <div class="col" id="description">
-          <p><sub>rainy</sub></p>
+        <div class="col-4 img mx-auto">
+          <div class="col" id="weather-img">
+            <img src="/images/icon.png">
+          </div>
+          <div class="col" id="description">
+            <p><sub>rainy</sub></p>
+          </div>
         </div>
       </div>
-    </div>
 
-   </div>
-   <!-- right side on large screen -->
-   <div class="col-md-5 right mx-auto pt-5">
-     <div id="location-right">
-      <h4> Location: <span class="location">Lagos, Nigeria</span></h4>
-     </div>
+    </div>
+    <!-- right side on large screen -->
+    <div class="col-md-5 right mx-auto pt-5">
+      <div id="location-right">
+        <h4> Location: <span class="location">Lagos, Nigeria</span></h4>
+      </div>
 
 
       <ul class="my-list mx-auto" id="w-details">
         <li class="w-list">Humidity: <span id="humidity"> 79%</span></li>
         <li class="w-list">Feels like: <span id="feels-like"> 25°c</span></li>
         <li class="w-list">Wind: <span id="wind">8.1</span></li>
-        <li class="w-list">lon: <span id ="lon">7.79</span> & lat: <span id="lat">3.5</span></li>
+        <li class="w-list">lon: <span id="lon">7.79</span> & lat: <span id="lat">3.5</span></li>
       </ul>
 
       <!-- Button trigger modal -->
       <div class="mt-3 text-center">
-<button type="button" class="btn" id="loc-btn" data-toggle="modal" data-target="#exampleModal">
-  Change Location
-</button>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Input Location</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <button type="button" class="btn" id="loc-btn" data-toggle="modal" data-target="#exampleModal">
+          Change Location
         </button>
       </div>
-      <div class="modal-body">
-       <form id="w-form">
-         <div class="form-group">
-           <label for="city">City</label>
-           <input type="text" id="city" class="form-control">
-         </div>
-         <!-- <div class="form-group">
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Input Location</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="w-form">
+                <div class="form-group">
+                  <label for="city">City</label>
+                  <input type="text" id="city" class="form-control">
+                </div>
+                <!-- <div class="form-group">
           <label for="country">Country</label>
           <input type="text" id="country" class="form-control">
         </div> -->
-       
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
-      </div>
-    </form>
-  </div>
 
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-   </div>
- </div>
 
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
- <script src="app.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+    integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+    crossorigin="anonymous"></script>
+  <script src="app.js"></script>
 </body>
+
 </html>

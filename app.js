@@ -11,8 +11,6 @@ const windEl = document.querySelector('#wind')
 const lonEl = document.querySelector('#lon')
 const latEl = document.querySelector('#lat')
 
-
-// console.log(locationEl)
 // GET USER INPUT
 
 const form = document.querySelector('form#w-form');
@@ -24,8 +22,6 @@ const weather = {};
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    
-    console.log('form submitted')
     const kelvin = 273;
     const api = `http://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${apiKey}`
     async function getData() {
@@ -53,11 +49,9 @@ form.addEventListener('submit', (e) => {
         humidityEl.innerHTML = humidity;
         lonEl.innerHTML = lon;
         latEl.innerHTML = lat;
+        windEl.innerHTML = wind;
         feelsLike.innerHTML = feels_like;
 
     }
     getData()
 })
-
-
-// api.openweathermap.org/data/2.5/weather?q='lagos'&appid='94d404dead129de2bd9ae79f89e983ef'
