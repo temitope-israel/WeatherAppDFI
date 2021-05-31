@@ -20,9 +20,12 @@ const input = document.querySelector('input#city');
 const apiKey = 'cb73d54fd3c69e4f08d471af29d67fa5';
 const kelvin = 273;
 const weather = {};
+// TURN COUNTRY CODES TO THEIR NAMES
+let regionNames = new Intl.DisplayNames(['en'], { type: 'region'});
 
 const addWeatherProps = (data) => {
-    weather.locate = `${data.name}, ${data.sys.country}`;
+    let country = regionNames.of(data.sys.country)
+    weather.locate = `${data.name}, ${country}`;
     weather.temperature = Math.floor(data.main.temp - kelvin);
     weather.humidity = data.main.humidity;
     weather.feels_like = Math.floor(data.main.feels_like - kelvin);
