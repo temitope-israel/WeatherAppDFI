@@ -16,31 +16,30 @@ const latEl = document.querySelector('#lat')
 const form = document.querySelector('form#w-form');
 const input = document.querySelector('input#city');
 
-// FETCH DATA FROM OPENWEATHERAPI
+// FETCH DATA FROM API
 const apiKey = 'cb73d54fd3c69e4f08d471af29d67fa5';
+const kelvin = 273;
 const weather = {};
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const kelvin = 273;
-    const api = `http://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${apiKey}`
-    async function getData() {
-        const res = await fetch(api);
-        let data = await res.json();
-        weather.locate = `${data.name}, ${data.sys.country}`;
-        weather.temperature = Math.floor(data.main.temp - kelvin);
-        weather.humidity = data.main.humidity;
-        weather.feels_like = Math.floor(data.main.feels_like - kelvin);
-        weather.wind = data.wind.speed;
-        weather.lon = Math.floor(data.coord.lon);
-        weather.lat = Math.floor(data.coord.lat);
-        weather.main = data.weather[0].main
-        weather.description = data.weather[0].description
-        weather.icon = data.weather[0].icon;
+const addWeatherProps = (data) => {
+    weather.locate = `${data.name}, ${data.sys.country}`;
+    weather.temperature = Math.floor(data.main.temp - kelvin);
+    weather.humidity = data.main.humidity;
+    weather.feels_like = Math.floor(data.main.feels_like - kelvin);
+    weather.wind = data.wind.speed;
+    weather.lon = Math.floor(data.coord.lon);
+    weather.lat = Math.floor(data.coord.lat);
+    weather.main = data.weather[0].main
+    weather.description = data.weather[0].description
+    weather.icon = data.weather[0].icon;
 
-        // POPULATE THE UI WITH THE DATA RETURNED
+      // POPULATE THE UI WITH THE DATA RETURNED
 
-        const { humidity, feels_like, wind, lon, lat, locate, temperature, main, description, icon } = weather;
+      populateUi()
+}
+
+function populateUi() {
+    const { humidity, feels_like, wind, lon, lat, locate, temperature, main, description, icon } = weather;
 
         tempValue.innerHTML = temperature
         locationEl.forEach(el => el.innerHTML = locate);
@@ -51,7 +50,46 @@ form.addEventListener('submit', (e) => {
         latEl.innerHTML = lat;
         windEl.innerHTML = wind;
         feelsLike.innerHTML = feels_like;
+}
 
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const api = `http://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${apiKey}`
+    async function getData() {
+        const res = await fetch(api);
+        let data = await res.json();
+        addWeatherProps(data)
     }
     getData()
 })
+
+// FETCH CURRENT LOCATION WEATHER DATA ON LOAD
+// CHECK IF NAVIGATOR (BROWSER) SUPPORTS GEOLOCATION
+
+if('geolocation' in navigator){
+    navigator.geolocation.getCurrentPosition(setPosition, showError)
+}else{
+    alert('Browser doesn\'t support geolocation')
+}
+
+const getWeather = (latitude, longitude) => {
+    let api = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+    async function getLocalWeather(){
+        let res = await fetch(api)
+        let data = await res.json();
+        addWeatherProps(data)
+    }
+    getLocalWeather()
+}
+
+function showError(error) {
+    console.error(error)
+}
+
+function setPosition({ coords }){
+    let latitude = coords.latitude;
+    let longitude = coords.longitude;
+
+    getWeather(latitude, longitude)
+}
+// IF IT SUPPORTS IT CALL THE API USING LAT & LON
