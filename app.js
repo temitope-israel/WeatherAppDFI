@@ -1,6 +1,6 @@
 // INIT storage.js
 const storage = new Storage()
-let city = storage.getLastLocation().city;
+let city = storage.getLastLocation().city
 console.log(city)
 // SELECT NECESSARY ELEMENTS
 
@@ -81,13 +81,15 @@ form.addEventListener('submit', (e) => {
 
 // FETCH CURRENT LOCATION WEATHER DATA ON LOAD
 // CHECK IF NAVIGATOR (BROWSER) SUPPORTS GEOLOCATION
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', getWeatherData)
+
+function getWeatherData() {
     if('geolocation' in navigator){
         navigator.geolocation.getCurrentPosition(setPosition, showError)
     }else{
         getData(city)
     }
-})
+}
 
 
 const getWeather = (latitude, longitude) => {
