@@ -1,6 +1,6 @@
 // INIT storage.js
 const storage = new Storage()
-let city = storage.getLastLocation()
+let city = storage.getLastLocation().city
 // SELECT NECESSARY ELEMENTS
 
 const tempValue = document.querySelector('#temperature');
