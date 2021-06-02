@@ -102,7 +102,7 @@ body {
     justify-self: center;
     padding: 0;
   }
-  #weather-img img {
+  #weather-img {
     height: 80px;
   }
 

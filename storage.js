@@ -14,6 +14,6 @@ class Storage {
         return {city: this.city}
     }
     setLastLocation(city) {
-        localStorage.setItem('city')
+        localStorage.setItem('city', city)
     }
 }

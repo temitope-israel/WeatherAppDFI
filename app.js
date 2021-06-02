@@ -49,7 +49,7 @@ function populateUi() {
 
         tempValue.innerHTML = temperature
         locationEl.forEach(el => el.innerHTML = locate);
-        weatherIcon.innerHTML = `<img src="icons/${icon}.png"/>`;
+        weatherIcon.setAttribute('src', `icons/${icon}.png`);
         weatherDescription.innerHTML = description;
         humidityEl.innerHTML = humidity;
         lonEl.innerHTML = lon;
@@ -70,7 +70,7 @@ form.addEventListener('submit', (e) => {
     city = input.value;
     
     getData(city)
-    
+
     // MAKE THE MODAL CLOSE ON SAVE CHANGES(WHEN THE FORM IS SUBMITTED) with jquery.
     $('#exampleModal').modal('hide')
 
