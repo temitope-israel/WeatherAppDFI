@@ -1,3 +1,6 @@
+// INIT storage.js
+const storage = new Storage()
+let city = storage.getLastLocation()
 // SELECT NECESSARY ELEMENTS
 
 const tempValue = document.querySelector('#temperature');
@@ -55,15 +58,24 @@ function populateUi() {
         feelsLike.innerHTML = feels_like;
 }
 
+async function getData(city) {
+    const api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+    const res = await fetch(api);
+    let data = await res.json();
+    addWeatherProps(data)
+}
+
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const api = `https://api.openweathermap.org/data/2.5/weather?q=${input.value}&appid=${apiKey}`
-    async function getData() {
-        const res = await fetch(api);
-        let data = await res.json();
-        addWeatherProps(data)
-    }
-    getData()
+    city = input.value;
+    
+    getData(city)
+    
+    // MAKE THE MODAL CLOSE ON SAVE CHANGES(WHEN THE FORM IS SUBMITTED) with jquery.
+    $('#exampleModal').modal('hide')
+
+    // STORE LAST CITY TO LOCAL STORAGE
+    storage.setLastLocation(city);
 })
 
 // FETCH CURRENT LOCATION WEATHER DATA ON LOAD
@@ -72,7 +84,7 @@ form.addEventListener('submit', (e) => {
 if('geolocation' in navigator){
     navigator.geolocation.getCurrentPosition(setPosition, showError)
 }else{
-    alert('Browser doesn\'t support geolocation')
+    getData(city)
 }
 
 const getWeather = (latitude, longitude) => {
@@ -96,3 +108,6 @@ function setPosition({ coords }){
     getWeather(latitude, longitude)
 }
 // IF IT SUPPORTS IT CALL THE API USING LAT & LON
+
+
+// 
