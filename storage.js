@@ -16,3 +16,5 @@ class Storage {
     localStorage.setItem("city", city);
   }
 }
+
+// testing app
