@@ -1,6 +1,7 @@
 // INIT storage.js
 const storage = new Storage()
-let city = storage.getLastLocation().city
+let city = storage.getLastLocation().city;
+console.log(city)
 // SELECT NECESSARY ELEMENTS
 
 const tempValue = document.querySelector('#temperature');
@@ -80,12 +81,14 @@ form.addEventListener('submit', (e) => {
 
 // FETCH CURRENT LOCATION WEATHER DATA ON LOAD
 // CHECK IF NAVIGATOR (BROWSER) SUPPORTS GEOLOCATION
+document.addEventListener('DOMContentLoaded', () => {
+    if('geolocation' in navigator){
+        navigator.geolocation.getCurrentPosition(setPosition, showError)
+    }else{
+        getData(city)
+    }
+})
 
-if('geolocation' in navigator){
-    navigator.geolocation.getCurrentPosition(setPosition, showError)
-}else{
-    getData(city)
-}
 
 const getWeather = (latitude, longitude) => {
     let api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
